@@ -1,0 +1,37 @@
+h1 {
+    color: darkgrey;
+    text-align: center;
+}
+
+body {
+    background: lightblue;
+    width: 500px;
+    margin: 200px auto;
+}
+
+footer {
+    background: linen;
+    width: 500px;
+    margin: 200px auto;
+}
+
+.play {
+    color: blue;
+    border: 2px blue;
+    text-align: left;
+
+}
+
+.help {
+    color: blue;
+    border: 2px blue;
+    text-align: left;
+
+}
+
+.madeBy {
+    color: blue;
+    border: 2px blue;
+    text-align: center;
+
+}

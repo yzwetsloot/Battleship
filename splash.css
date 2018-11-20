@@ -31,10 +31,10 @@ p {
     height: 10px;
 }
 h1 {
+    clear: both;
     font-size: 600%;
     height: 50px;
     text-align: center;
-    width: 1255px;
     
 }
 
@@ -47,4 +47,8 @@ h1 {
 
 .undertext {
     font-size: 150%;
+}
+
+.buttons {
+    clear: both;
 }

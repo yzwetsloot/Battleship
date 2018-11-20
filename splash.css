@@ -2,6 +2,7 @@ body {
     background: #EBF6FC;
     align-self: center;
     font-family: 'Roboto', sans-serif;
+
 }
 
 header, main, footer {
@@ -18,7 +19,7 @@ footer {
     width: 1470px;
 }
 
-div {
+.info {
     line-height: 1px; 
     float:left;
     font-size: 120%;
@@ -31,9 +32,9 @@ p {
 }
 h1 {
     font-size: 600%;
-    height: 40px;
+    height: 50px;
     text-align: center;
-    width: 1280px;
+    width: 1255px;
     
 }
 
@@ -47,7 +48,3 @@ h1 {
 .undertext {
     font-size: 150%;
 }
-
-
-
-

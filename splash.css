@@ -2,7 +2,6 @@ body {
     background: #EBF6FC;
     align-self: center;
     font-family: 'Roboto', sans-serif;
-
 }
 
 header, main, footer {
@@ -13,6 +12,10 @@ header, main, footer {
 
 header {
     margin-left: 20px;
+}
+
+main {
+    width: 800px;
 }
 
 footer {
@@ -27,22 +30,15 @@ footer {
     width: 200px;
 }
 
-p {
-    height: 10px;
-}
 h1 {
     clear: both;
     font-size: 600%;
     height: 50px;
     text-align: center;
-    
 }
 
-.madeby {
+p {
     height: 10px;
-    line-height: 470px;
-    font-size: 120%;
-    float:right;
 }
 
 .undertext {
@@ -51,4 +47,29 @@ h1 {
 
 .buttons {
     clear: both;
+}
+
+.play, .howTo {
+    text-align: center;
+    font-size: 350%;
+    background: #529CE3;
+    padding: 6px;
+    border-radius: 10px;
+    width: 350px;
+}
+
+.play {
+    float: left;
+}
+
+.howTo {
+    float: right;
+}
+
+.madeby {
+    clear: both;
+    height: 10px;
+    line-height: 250px;
+    font-size: 120%;
+    float: right;
 }

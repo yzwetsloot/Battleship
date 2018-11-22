@@ -1,0 +1,71 @@
+body {
+    background: #EBF6FC;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    margin-left: 20px;
+	top:20px;
+}
+
+.info {
+    line-height: 1px; 
+    float:left;
+    font-size: 120%;
+    text-align: left;
+    width: 200px;
+}
+
+
+
+.logo{
+	width: 150px;
+    height: 150px;
+	position: absolute;
+    right:40px;
+    top:20px;
+}
+
+.status{ 
+    position: absolute;
+    right:680px;
+    top:20px;
+
+}
+
+.credit{
+	font-size: 120%;
+	position: absolute;
+    right:40px;
+    bottom:20px;
+}
+
+.player1{
+	font-size: 120%;
+	position: absolute;
+    	left:380px;
+	bottom:70px;
+}
+
+.player2{
+	font-size: 120%;
+	position: absolute;
+    right:400px;
+	bottom:70px;
+}
+
+.p1board{
+	height:100%;
+	width:auto;
+	position: absolute;
+    	left:170px;
+	top:150px;
+}
+
+.p2board{
+	height:100%;
+	width:auto;
+	position: absolute;
+    	right:270px;
+	top:150px;
+}

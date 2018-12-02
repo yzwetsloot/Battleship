@@ -22,6 +22,16 @@ footer {
     width: 1470px;
 }
 
+.play:hover{
+    cursor: pointer;
+    background-color: rgb(47, 140, 228);
+}
+
+.howTo:hover{
+    cursor: pointer;
+    background-color: rgb(47, 140, 228);
+}
+
 .info {
     line-height: 1px; 
     float:left;

@@ -33,6 +33,21 @@ header {
 
 }
 
+.box{
+    background: white;
+    width: 44px;
+    height: 44px;
+    border: 1px solid;
+    border-color: grey;
+    float: left;
+    text-align: center;   
+}
+
+.box:hover{
+    cursor: pointer;
+    background-color: grey;
+}
+
 .credit{
 	font-size: 120%;
 	position: absolute;
@@ -43,14 +58,14 @@ header {
 .player1{
 	font-size: 120%;
 	position: absolute;
-    	left:380px;
+    left:340px;
 	bottom:70px;
 }
 
 .player2{
 	font-size: 120%;
 	position: absolute;
-    right:400px;
+    right:360px;
 	bottom:70px;
 }
 

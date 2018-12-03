@@ -22,6 +22,10 @@ footer {
     width: 1470px;
 }
 
+.x{
+   font-size: 120%;
+   margin-bottom: 5px;
+}
 .close{
     background: white;
     width: 20px;

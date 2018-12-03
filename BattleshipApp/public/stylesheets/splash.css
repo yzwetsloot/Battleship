@@ -47,11 +47,13 @@ footer {
 .play:hover{
     cursor: pointer;
     background-color: rgb(47, 140, 228);
+    padding: 10px;
 }
 
 .howTo:hover{
     cursor: pointer;
     background-color: rgb(47, 140, 228);
+    padding: 10px;
 }
 
 .info {
@@ -62,7 +64,7 @@ footer {
     width: 200px;
 }
 
-@keyframes example {
+@keyframes changeColor {
     from {color: black; }
     to {color: slategray; }
 }
@@ -72,11 +74,15 @@ h1 {
     font-size: 600%;
     height: 50px;
     text-align: center;
-    animation-name: example;
-    animation-duration: 4s;
+    animation-name: changeColor;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 
+}
+
+h1:hover {
+    font-size: 700%;
 }
 
 p {
@@ -100,15 +106,16 @@ p {
     width: 350px;
 }
 
-.Rules{
-    position: absolute;
+.rules{
+    position:absolute;
     top: 200px;
     left: 500px;
     text-align: center;
     font-size: 150%;
-    background: #529CE3;
-    padding: 6px;
+    opacity: 0.95;
+    background: white;
     border-radius: 10px;
+    border-width: 20px;
     width: 500px;  
 }
 

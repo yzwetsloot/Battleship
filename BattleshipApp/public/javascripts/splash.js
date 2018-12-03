@@ -1,16 +1,16 @@
 var main = function () {
     "use strict";
     //popup 
-    $(".Rules").hide();
+    $(".rules").hide();
     $(".close").hide();
 
     $(".howTo").on("click", function (event) {
-        $(".Rules").fadeIn();
+        $(".rules").fadeIn();
         $(".close").fadeIn();
     });
 
     $(".close").on("click", function (event) {
-        $(".Rules").fadeOut();
+        $(".rules").fadeOut();
         $(".close").fadeOut();
     });
     

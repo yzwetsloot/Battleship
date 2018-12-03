@@ -77,9 +77,8 @@ p {
 }
 
 .madeby {
-    clear: both;
-    height: 10px;
-    line-height: 250px;
     font-size: 120%;
-    float: right;
+	position: absolute;
+    right:40px;
+    bottom:20px;
 }

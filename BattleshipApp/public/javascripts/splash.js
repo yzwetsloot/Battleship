@@ -1,6 +1,6 @@
 var main = function () {
     "use strict";
-
+    //popup 
     $(".Rules").hide();
     $(".close").hide();
 
@@ -13,7 +13,8 @@ var main = function () {
         $(".Rules").fadeOut();
         $(".close").fadeOut();
     });
-
+    
+    //
     
    };
 $(document).ready(main);

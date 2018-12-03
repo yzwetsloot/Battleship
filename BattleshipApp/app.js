@@ -1,7 +1,5 @@
 var express = require("express");
 var http = require("http");
-var router = express.Router();
-
 
 var port = process.argv[2];
 

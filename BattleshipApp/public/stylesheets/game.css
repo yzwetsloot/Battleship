@@ -1,11 +1,16 @@
 body {
     background: #EBF6FC;
+    align-self: center;
     font-family: 'Roboto', sans-serif;
 }
 
 header {
     margin-left: 20px;
 	top:20px;
+}
+
+p {
+    height: 10px;
 }
 
 .info {
@@ -70,19 +75,13 @@ header {
 }
 
 .p1board{
-	height:100%;
-	width:auto;
 	position: absolute;
-    	left:170px;
+    left:170px;
 	top:150px;
 }
 
 .p2board{
-	height:100%;
-	width:auto;
 	position: absolute;
-    	right:270px;
+    right:270px;
 	top:150px;
 }
-
-

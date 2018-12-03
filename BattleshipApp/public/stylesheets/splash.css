@@ -62,11 +62,21 @@ footer {
     width: 200px;
 }
 
+@keyframes example {
+    from {color: black; }
+    to {color: slategray; }
+}
+
 h1 {
     clear: both;
     font-size: 600%;
     height: 50px;
     text-align: center;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
 }
 
 p {
@@ -118,3 +128,4 @@ p {
     right:40px;
     bottom:20px;
 }
+

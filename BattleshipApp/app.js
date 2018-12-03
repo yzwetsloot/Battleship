@@ -12,8 +12,6 @@ app.get('/', function(req, res, next) {
   res.sendFile("splash.html", {root: "./public"});
 });
 
-
 app.get("/play", function(req, res,next) {
   res.sendFile("game.html", {root: "./public"});
 });
-

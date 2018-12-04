@@ -64,21 +64,85 @@ footer {
     width: 200px;
 }
 
+/*Animating of title: Battleship
+    First part changes color over a 2 second interval, gets alternated*/
 @keyframes changeColor {
     from {color: black; }
     to {color: slategray; }
 }
 
+@keyframes changePosition {
+    0% {
+        top:0px;
+    }
+    50% {
+        top:-30px;
+    }
+    100% {
+        top:0px;   
+    }
+}
+
+h1:hover {
+    font-size: 700%;
+}
+
 h1 {
-    clear: both;
-    font-size: 600%;
+    clear:both;
     height: 50px;
+    font-size: 600%;
     text-align: center;
     animation-name: changeColor;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 
+}
+
+h1 span {
+    position: relative;
+}
+.char1, .char2, .char3, .char4, .char5, .char6, .char7, .char8, .char9, .char10 {
+    animation-name: changePosition;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.char2 {
+    animation-delay: 150ms;
+}
+
+.char3 {
+    animation-delay: 230ms;
+}
+
+.char4 {
+    animation-delay: 310ms;
+}
+
+.char5 {
+    animation-delay: 390ms;
+}
+
+.char6 {
+    animation-delay: 470ms;
+}
+
+.char7 {
+    animation-delay: 550ms;
+}
+
+.char8 {
+    animation-delay: 630ms;
+}
+
+.char9 {
+    animation-delay: 710ms;
+}
+
+.char10 {
+    animation-delay: 790ms;
 }
 
 @keyframes changeAngle {
@@ -91,10 +155,6 @@ img {
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-
-h1:hover {
-    font-size: 700%;
 }
 
 p {

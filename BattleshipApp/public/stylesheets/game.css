@@ -109,3 +109,21 @@ img {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+.home {
+    left: 20px; 
+    top: 540px;
+    position: relative;
+    text-align: center;
+    font-size: 100%;
+    background: #529CE3;
+    padding: 6px;
+    border-radius: 10px;
+    clear: both;
+    float: left;
+}
+
+.home:hover {
+    cursor: pointer;
+    background-color: rgb(47, 140, 228);
+    padding: 10px;
+}

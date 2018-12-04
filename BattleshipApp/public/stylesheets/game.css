@@ -97,3 +97,15 @@ p {
     right:270px;
 	top:150px;
 }
+
+@keyframes changeAngle {
+    from {transform: rotate(10deg);}
+    to {transform: rotate(-10deg);}
+}
+
+img {
+    animation-name: changeAngle;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

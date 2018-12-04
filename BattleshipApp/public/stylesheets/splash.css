@@ -81,6 +81,18 @@ h1 {
 
 }
 
+@keyframes changeAngle {
+    from {transform: rotate(10deg);}
+    to {transform: rotate(-10deg);}
+}
+
+img {
+    animation-name: changeAngle;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 h1:hover {
     font-size: 700%;
 }

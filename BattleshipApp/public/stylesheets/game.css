@@ -127,3 +127,23 @@ img {
     background-color: rgb(47, 140, 228);
     padding: 10px;
 }
+
+@keyframes typingAnimation {
+    from {
+        width: 0px;
+    }
+
+    to {
+        width: 300px;
+    }
+}
+
+h2 {
+    left: -265px;
+    position: absolute;
+    display: inline-block;
+    white-space: nowrap;
+    animation-name: typingAnimation;
+    animation-duration: 3s;
+    overflow: hidden;
+}

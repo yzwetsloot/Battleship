@@ -18,14 +18,6 @@ var main = function() {
         $(".boat").draggable();
     });
 
-    var clickCount = 0;
-    //allow user to click on enemies field, change color limited amount
-    $(".p2board .box").on("click", function (event) {
-        
-        console.log("Hello world!");
-        clickCount++;
-        console.log(clickCount);
-    });
 }
 
 $(document).ready(main);

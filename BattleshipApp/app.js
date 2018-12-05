@@ -21,3 +21,10 @@ app.get('/', function(req, res, next) {
 app.get("/play", function(req, res,next) {
   res.sendFile("game.html", {root: "./public"});
 });
+
+//variables for statistics
+var gamesPlayed;
+
+var playersOnline;
+
+var boatsSunk;

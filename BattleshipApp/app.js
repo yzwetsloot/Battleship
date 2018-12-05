@@ -1,6 +1,7 @@
 //require express- and http-modules
 var express = require("express");
 var http = require("http");
+var websocket = require("ws")
 
 //allow third argument in terminal to be port 
 var port = process.argv[2];

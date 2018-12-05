@@ -17,7 +17,6 @@ var main = function() {
     $(function() {
         $(".boat").draggable();
     });
-
 }
 
 $(document).ready(main);

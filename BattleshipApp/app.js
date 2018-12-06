@@ -1,33 +1,53 @@
-//require express- and http-modules
 var express = require("express");
 var http = require("http");
+var websocket = require("ws")
+//var game = require("./public/javascripts/game.js");
+var gameStatus = require("./statTracker.js");
 
-//allow third argument in terminal to be port 
 var port = process.argv[2];
 
-//let app be express
 var app = express();
 
-//make app into a static file server, make it listen on port (third argument in terminal)
 app.use(express.static(__dirname + "/public"));
 
-http.createServer(app).listen(3000, function(){
-  console.log("# Listening to port 3000")
+var server = http.createServer(app).listen(port, function () {
+  console.log("Server started");
+});
+
+const wss = new websocket.Server({ server });
+
+//var currentGame = new game(gameStatus.gameInitialized++);
+var connectionID = 0; //unique id for websocket connection
+
+wss.on("connection", function(ws) {
+    setTimeout(function() {
+        console.log("Connection state: "+ ws.readyState);
+        ws.send("Waiting for opponent...");
+
+        let con = ws;
+        con.id = connectionID++;
+        console.log(connectionID);
+        ws.close();
+        console.log("Connection state: "+ ws.readyState);
+    }, 2000);
+
+    ws.on("message", function incoming(message) {
+        console.log("[LOG] " + message);
+
+    });
 });
 
 //setup root route, response splash.html from root /public
-app.get('/', function(req, res, next) {
+app.get('/', function(req, res) {
   res.sendFile("splash.html", {root: "./public"});
 });
 
 //setup route /play which loads game.html
-app.get("/play", function(req, res,next) {
+app.get("/play", function(req, res) {
   res.sendFile("game.html", {root: "./public"});
 });
 
-//variables for statistics
-var gamesPlayed;
+app.get("/*", function(req, res) {
+  res.send("Not a valid route...");
+})
 
-var playersOnline;
-
-var boatsSunk;

@@ -14,16 +14,8 @@ var main = function () {
         $(".close").fadeOut();
     });
 
-    /*var clickSomewhere = function () {
-            $(":not(.rules, .howTo)").on("click", function (event) {
-            $(".rules").fadeOut();
-            $(".close").fadeOut();
-        });
-    };
-    setInterval(clickSomewhere, 3000);*/
-
-    //
+    //maybe implement it so that clicking anywhere except howToPlay message makes it dissappear
     
-   };
+};
 $(document).ready(main);
    

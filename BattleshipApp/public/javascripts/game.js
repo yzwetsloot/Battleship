@@ -1,5 +1,5 @@
 var main = function() {
-    "use strict";
+   "use strict";
     //display current date
     var today = new Date();
 
@@ -28,6 +28,18 @@ var main = function() {
         $(".boat3").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
         preventCollision: true, containment: "parent"});
     });
-}
+
+    //implementing webSockets
+    var socket = new WebSocket("ws://localhost:3000");
+    socket.onopen = function(){
+        socket.send("Hello from client");
+        document.getElementById("status").innerHTML = "Sending a first message to the server ...";
+    };
+
+
+    socket.onmessage = function(event){
+        document.getElementById("status").innerHTML = event.data;
+    };
+};
 
 $(document).ready(main);

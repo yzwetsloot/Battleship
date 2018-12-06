@@ -233,7 +233,7 @@ h2 {
     position: absolute;
     display: inline-block;
     white-space: nowrap;
-    animation-name: typingAnimation;
+    /*animation-name: typingAnimation;*/
     animation-duration: 3s;
     overflow: hidden;
 }

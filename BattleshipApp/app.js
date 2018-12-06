@@ -33,6 +33,7 @@ wss.on("connection", function(ws) {
 
     ws.on("message", function incoming(message) {
         console.log("[LOG] " + message);
+
     });
 });
 

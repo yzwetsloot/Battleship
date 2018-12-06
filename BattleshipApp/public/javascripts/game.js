@@ -21,7 +21,7 @@ var main = function() {
     //implementing webSockets
     var socket = new WebSocket("ws://localhost:3000");
     socket.onopen = function(){
-        socket.send("Hello from client [= Connection state: 1]");
+        socket.send("Hello from client");
         document.getElementById("status").innerHTML = "Sending a first message to the server ...";
     };
 
@@ -29,17 +29,6 @@ var main = function() {
     socket.onmessage = function(event){
         document.getElementById("status").innerHTML = event.data;
     };
-
-
-    /*
-    //game constructor
-    var game = function (gameID) {
-        this.playerA = null;
-        this.playerB = null;
-        this.game = gameID;
-        //this.gameState = "0 players";
-    };
-    */
-}
+};
 
 $(document).ready(main);

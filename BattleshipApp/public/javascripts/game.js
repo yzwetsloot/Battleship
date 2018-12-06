@@ -15,9 +15,19 @@ var main = function() {
     
     //ensure boat draggable
     $(function() {
-        $(".boat").draggable();
+        $(".boat").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+        preventCollision: true, containment: "parent"});
     });
 
+    $(function() {
+        $(".boat2").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+        preventCollision: true, containment: "parent"});
+    });
+
+    $(function() {
+        $(".boat3").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+        preventCollision: true, containment: "parent"});
+    });
 }
 
 $(document).ready(main);

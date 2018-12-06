@@ -10,7 +10,10 @@ var app = express();
 
 //make app into a static file server, make it listen on port (third argument in terminal)
 app.use(express.static(__dirname + "/public"));
-http.createServer(app).listen(port);
+
+http.createServer(app).listen(3000, function(){
+  console.log("# Listening to port 3000")
+});
 
 //setup root route, response splash.html from root /public
 app.get('/', function(req, res, next) {

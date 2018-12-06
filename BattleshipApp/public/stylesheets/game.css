@@ -48,6 +48,15 @@ p {
     text-align: center;   
 }
 
+.box2{
+    background: white;
+    width: 44px;
+    height: 44px;
+    border: 1px solid;
+    border-color: grey;
+    float: left;
+    text-align: center; 
+}
 .boat{
     position: absolute;
     background: rgba(82, 82, 82, 0.575);
@@ -56,11 +65,92 @@ p {
     border: 1px solid;
     border-color: rgb(65, 65, 65);
     float: left;
-    text-align:s center; 
-    left: 20px;
+    text-align: center; 
 }
 
-.box:hover{
+.boat:hover{
+    cursor: pointer;
+}
+
+.boat2:hover{
+    cursor: pointer;
+}
+
+.boat3:hover{
+    cursor: pointer;
+}
+
+.boat2{
+    position: absolute;
+    background: rgba(82, 82, 82, 0.575);
+    width: 44px;
+    height: 89px;
+    border: 1px solid;
+    border-color: rgb(65, 65, 65);
+    float: left;
+    text-align: center; 
+}
+
+.boat3{
+    position: absolute;
+    background: rgba(82, 82, 82, 0.575);
+    width: 44px;
+    height: 136px;
+    border: 1px solid;
+    border-color: rgb(65, 65, 65);
+    float: left;
+    text-align: center; 
+}
+
+#small1{
+    left: 46px;
+}
+
+#small2{
+    left: 368px;
+    top: 369px;
+}
+
+#small3{
+    left: 368px;
+    top: 46px;
+}
+
+#small4{
+    left: 322px;
+    top: 138px;
+}
+
+#med1{
+    left: 184px;
+    top: 47px;
+}
+
+#med2{
+    left: 230px;
+    top: 369px;
+}
+
+#med3{
+    width: 89px;
+    height: 44px;
+    left: 47px;
+    top:185px;
+}
+
+#large1{
+    left: 46px;
+    top: 322px;
+}
+
+#large2{
+    width: 136px;
+    height: 44px;
+    left: 230px;
+    top: 277px;
+}
+
+.box2:hover{
     cursor: pointer;
     background-color: grey;
 }

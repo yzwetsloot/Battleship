@@ -14,14 +14,14 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 
 //create server, let it listen on port provided as third argument in terminal window
-//callback function prints to console that server is started and it's listening for subscribers
+//callback function prints to console that server is started
 http.createServer(app).listen(port, function () {
-  console.log("Server started\nListening for subscribers...")
+  console.log("Server started");
 });
 
 /*var server = net.createServer(function (connection) {
 
-  //what to do on connect
+  connection.write("Connected?");
 });*/
 
 //setup root route, response splash.html from root /public

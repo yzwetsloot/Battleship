@@ -1,5 +1,6 @@
 var main = function () {
     "use strict";
+    
     //popup 
     $(".rules").hide();
     $(".close").hide();

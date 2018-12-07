@@ -30,7 +30,7 @@ wss.on("connection", function(ws) {
         console.log("Player %s placed in game %s as %s",  con.id, currentGame.id, playerType);
 
         if (currentGame.hasTwoConnectedPlayers()) {
-          currentGame = new Game(gameStatus.gamesInitialized++);
+          currentGame = new game(gameStatus.gamesInitialized++);
         }
 
         ws.close();

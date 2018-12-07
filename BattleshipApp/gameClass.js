@@ -39,7 +39,7 @@ game.prototype.addPlayer = function (p) {
     }
 
     var error = this.setStatus("1 JOINT");
-    if(error instanceof Error){
+    if(this.playerA != null){
         this.setStatus("2 JOINT");
     }
 

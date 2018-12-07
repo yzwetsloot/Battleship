@@ -1,11 +1,9 @@
 var express = require("express");
 var http = require("http");
 var websocket = require("ws")
-//var game = require("./public/javascripts/game.js");
-var gameStatus = require("./statTracker.js");
-
+var game = require("./gameClass");
+var gameStatus = require("./statTracker");
 var port = process.argv[2];
-
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
@@ -15,8 +13,9 @@ var server = http.createServer(app).listen(port, function () {
 });
 
 const wss = new websocket.Server({ server });
+var websockets = {};
 
-//var currentGame = new game(gameStatus.gameInitialized++);
+var currentGame = new game(gameStatus.gamesInitialized++);
 var connectionID = 0; //unique id for websocket connection
 
 wss.on("connection", function(ws) {
@@ -26,7 +25,14 @@ wss.on("connection", function(ws) {
 
         let con = ws;
         con.id = connectionID++;
-        console.log(connectionID);
+        let playerType = currentGame.addPlayer(con);
+        websockets[con.id] = currentGame;
+        console.log("Player %s placed in game %s as %s",  con.id, currentGame.id, playerType);
+
+        if (currentGame.hasTwoConnectedPlayers()) {
+          currentGame = new Game(gameStatus.gamesInitialized++);
+        }
+
         ws.close();
         console.log("Connection state: "+ ws.readyState);
     }, 2000);

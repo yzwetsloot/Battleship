@@ -23,7 +23,6 @@ wss.on("connection", function(ws) {
     setTimeout(function() {
         console.log("Connection state: "+ ws.readyState);
         ws.send("Waiting for opponent...");
-
         let con = ws;
         con.id = connectionID++;
         let playerType = currentGame.addPlayer(con);
@@ -33,6 +32,7 @@ wss.on("connection", function(ws) {
         if (currentGame.hasTwoConnectedPlayers()) {
           currentGame = new game(gameStatus.gamesInitialized++);
         }
+
 
         ws.close();
         console.log("Connection state: "+ ws.readyState);

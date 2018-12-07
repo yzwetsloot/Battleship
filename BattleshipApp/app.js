@@ -20,10 +20,13 @@ var connectionID = 0; //unique id for websocket connection
 
 //callback function gets called after timeout of 2 secs everytime a connection is established
 wss.on("connection", function(ws) {
+
+  let con;
+
     setTimeout(function() {
         console.log("Connection state: "+ ws.readyState);
         ws.send("Waiting for opponent...");
-        let con = ws;
+        con = ws;
         con.id = connectionID++;
         let playerType = currentGame.addPlayer(con);
         websockets[con.id] = currentGame;
@@ -31,13 +34,11 @@ wss.on("connection", function(ws) {
         con.send((playerType == "A") ? "You are player A" : "You are player B");
 
         if (currentGame.hasTwoConnectedPlayers()) {
+          currentGame.playerA.send("Game started");
+          currentGame.playerB.send("Game started");
           currentGame = new game(gameStatus.gamesInitialized++);
         }
-        
-        
-        //setTimeout(function() {con.send("Game started")}, 2000);
 
-        //ws.close();
         console.log("Connection state: "+ ws.readyState);
     }, 2000);
 
@@ -46,7 +47,7 @@ wss.on("connection", function(ws) {
 
     });
 
-    con.on("close", function(code) {
+    ws.on("close", function(code) {
       console.log(con.id + " disconnected... ");
 
       let gameObj = websockets[con.id];

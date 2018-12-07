@@ -28,14 +28,16 @@ wss.on("connection", function(ws) {
         let playerType = currentGame.addPlayer(con);
         websockets[con.id] = currentGame;
         console.log("Player %s placed in game %s as %s",  con.id, currentGame.id, playerType);
-        
+        con.send((playerType == "A") ? "You are player A" : "You are player B");
+
         if (currentGame.hasTwoConnectedPlayers()) {
           currentGame = new game(gameStatus.gamesInitialized++);
         }
+        
+        
+        //setTimeout(function() {con.send("Game started")}, 2000);
 
-        con.send((playerType = "A") ? "You are player A" : "You are player B");
-
-        ws.close();
+        //ws.close();
         console.log("Connection state: "+ ws.readyState);
     }, 2000);
 
@@ -43,6 +45,35 @@ wss.on("connection", function(ws) {
         console.log("[LOG] " + message + " " + connectionID);
 
     });
+
+    con.on("close", function(code) {
+      console.log(con.id + " disconnected... ");
+
+      let gameObj = websockets[con.id];
+
+      if (code == "1001") {
+        gameObj.setStatus("ABORTED");
+        gameStatus.gamesAborted++;
+
+        try {
+          gameObj.playerA.close();
+          gameObj.playerA == null;
+        }
+
+        catch (e) {
+          console.log("Player A closing: "+ e);
+        }
+
+        try {
+          gameObj.playerB.close();
+          gameObj.playerB.close();
+        }
+
+        catch (e) {
+          console.log("Player B closing: " + e);
+        }
+      }
+    })
 });
 
 //setup root route, response splash.html from root /public

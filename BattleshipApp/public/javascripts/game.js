@@ -34,7 +34,6 @@ var main = function() {
     socket.onopen = function(){
         socket.send("Hello from client");
         document.getElementById("status").innerHTML = "Sending a first message to the server ...";
-        socket.send()
     };
 
 

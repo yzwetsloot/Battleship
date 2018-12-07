@@ -17,6 +17,7 @@ var websockets = {};
 
 var currentGame = new game(gameStatus.gamesInitialized++);
 var connectionID = 0; //unique id for websocket connection
+var counter = 0;
 
 wss.on("connection", function(ws) {
     setTimeout(function() {
@@ -28,7 +29,7 @@ wss.on("connection", function(ws) {
         let playerType = currentGame.addPlayer(con);
         websockets[con.id] = currentGame;
         console.log("Player %s placed in game %s as %s",  con.id, currentGame.id, playerType);
-
+        
         if (currentGame.hasTwoConnectedPlayers()) {
           currentGame = new game(gameStatus.gamesInitialized++);
         }
@@ -38,7 +39,7 @@ wss.on("connection", function(ws) {
     }, 2000);
 
     ws.on("message", function incoming(message) {
-        console.log("[LOG] " + message);
+        console.log("[LOG] " + message + " " + connectionID);
 
     });
 });

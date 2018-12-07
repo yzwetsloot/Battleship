@@ -38,17 +38,19 @@ game.prototype.addPlayer = function (p) {
         return new Error("Invalid call to addPlayer, current state is %s", this.gameState);
     }
 
-    var error = this.setStatus("1 JOINT");
-    if(this.playerA != null){
+    //var error = this.setStatus("1 JOINT");
+    /*if(error instanceof Error){
         this.setStatus("2 JOINT");
-    }
+    }*/
 
     if (this.playerA == null) {
+        this.setStatus("1 JOINT");
         this.playerA = p;
         return "A";
     }
     else {
         this.playerB = p;
+        this.setStatus("2 JOINT");
         return "B";
     }
 };

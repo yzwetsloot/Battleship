@@ -68,7 +68,8 @@ var main = function() {
             $(document).one("click", function (event) { 
                 $(event.target).css('background-color', '#69f0ae');
                 $(".cover").show();
-                socket.send("Move: ");
+                let move = "Move: " + event.target.innerHTML;
+                socket.send(move); //+ event.target.nodeName());
             })
         }
     };

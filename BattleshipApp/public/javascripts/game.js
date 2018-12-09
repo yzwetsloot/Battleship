@@ -1,6 +1,8 @@
 var main = function() {
    "use strict";
 
+   $(".cover").hide();
+
     function printTime () {
         var today = new Date();
         var hours = today.getHours();
@@ -51,11 +53,10 @@ var main = function() {
                 if (seconds >= 0) {
                     countDown();
                 }
-
                 else {
                     document.getElementById("status").innerHTML = "Game will now start";
                     socket.send("Clients ready");
-                    clearInterval(x)
+                    clearInterval(x);
                 }
 
             },1000);
@@ -63,7 +64,18 @@ var main = function() {
         }
 
         if (event.data == "It's your turn") {
-            
+            /*$(".p2board").on("click", function (event) {
+                $(document).click(function(event) {
+                    //var text = $(event.target).text();
+                    $(event.target).css('background-color', '#69f0ae');
+                    $(".cover").show();
+                });
+                
+            })*/
+            $(document).one("click", function (event) {
+                $(event.target).css('background-color', '#69f0ae');
+                $(".cover").show();
+            })
         }
     };
 };

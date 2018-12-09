@@ -237,3 +237,13 @@ h2 {
     animation-duration: 3s;
     overflow: hidden;
 }
+
+.cover {
+    position: absolute;
+    background-color: grey;
+    opacity: 0.4;
+    right: 270px;
+    top: 150px;
+    width: 460px;
+    height: 460px;
+}

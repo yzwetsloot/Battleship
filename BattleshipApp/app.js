@@ -62,6 +62,7 @@ wss.on("connection", function (ws) {
     if (message == "Ready from client" && gameObj.playerB == con) {
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's player A's turn");
+      console.log("[LOG] " + message + " " + (connectionID));
     }
     else {
       console.log("[LOG] " + message + " " + (connectionID - 1));

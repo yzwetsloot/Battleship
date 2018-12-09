@@ -52,6 +52,10 @@ var main = function() {
             });
             
         }
+
+        if (event.data == "It's your turn") {
+            
+        }
     };
 };
 

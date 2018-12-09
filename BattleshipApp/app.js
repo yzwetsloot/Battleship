@@ -37,7 +37,6 @@ wss.on("connection", function (ws) {
   gameStatus.playersOnline++;
   let con;
 
-  //setTimeout(function() {
   console.log("Connection state: " + ws.readyState);
   ws.send("Waiting for opponent...");
   con = ws;
@@ -54,28 +53,29 @@ wss.on("connection", function (ws) {
   }
 
   console.log("Connection state: " + ws.readyState);
-  //}, 2000);
 
   con.on("message", function incoming(message) {
     
     let gameObj = websockets[con.id];
 
-    if (message == "Client ready") {
+    if (message == "Client ready" && con == gameObj.playerA) {
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's player A's turn");
       console.log("[LOG] " + message);
     }
-
+    //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerA) {
       console.log("[LOG] " + message);
       gameObj.playerB.send("It's your turn");
       gameObj.playerA.send("It's B's turn");
-    }
 
+    }
+    //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerB) {
       console.log("[LOG] " + message);
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's A's turn");
+
     }
     if (message == "Hello from client") {
       console.log("[LOG] " + message + " " + (connectionID - 1));

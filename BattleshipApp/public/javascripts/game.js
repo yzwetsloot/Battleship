@@ -75,7 +75,6 @@ var main = function() {
     socket.onmessage = function(event){
         document.getElementById("status").innerHTML = event.data;
         if (event.data == "Game started") {
-            //setTimeout(function() {document.getElementById("status").innerHTML = "Set boats" + "(" + setInterval(countDown, 1000 + ")");}, 1000);
             var x = setInterval(function () { 
                 if (seconds >= 0) {
                     countDown();
@@ -95,8 +94,8 @@ var main = function() {
             $(document).one("click", function (event) { 
                 $(event.target).css('background-color', '#69f0ae');
                 $(".cover").show();
-                let move = "Move: " + event.target.innerHTML;
-                socket.send(move); //+ event.target.nodeName());
+                let move = "Move: " + $(event.target).attr('id');
+                socket.send(move); 
             })
         }
     };

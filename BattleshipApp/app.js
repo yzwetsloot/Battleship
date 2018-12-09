@@ -64,7 +64,7 @@ wss.on("connection", function (ws) {
       gameObj.playerB.send("It's player A's turn");
     }
     else {
-      console.log("[LOG] " + message + " " + connectionID);
+      console.log("[LOG] " + message + " " + connectionID - 1);
     }
 
   });

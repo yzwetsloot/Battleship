@@ -1,9 +1,5 @@
 var main = function() {
    "use strict";
-    //display current date
-    var today = new Date();
-
-    $(".ready").hide();
 
     function printTime () {
         var today = new Date();
@@ -14,6 +10,14 @@ var main = function() {
     }
 
     setInterval(printTime, 1000);
+    
+    var seconds = 10;
+
+    function countDown () {
+        document.getElementById('status').innerHTML = "Set boats " + "(" + seconds + ")";
+        seconds--;
+
+    }
     
     //ensure boat draggable
     $(function() {
@@ -42,14 +46,19 @@ var main = function() {
     socket.onmessage = function(event){
         document.getElementById("status").innerHTML = event.data;
         if (event.data == "Game started") {
-            setTimeout(function() {document.getElementById("status").innerHTML = "Set boats";}, 1000);
-            $(".ready").show();
+            //setTimeout(function() {document.getElementById("status").innerHTML = "Set boats" + "(" + setInterval(countDown, 1000 + ")");}, 1000);
+            var x = setInterval(function () { 
+                if (seconds >= 0) {
+                    countDown();
+                }
 
-            $(".ready").on("click", function (event) {
-                socket.send("Ready from client");
-                $(".ready").fadeOut();
-                document.getElementById("status").innerHTML = "Waiting for opponent to set boats...";
-            });
+                else {
+                    document.getElementById("status").innerHTML = "Game will now start";
+                    socket.send("Clients ready");
+                    clearInterval(x)
+                }
+
+            },1000);
             
         }
 

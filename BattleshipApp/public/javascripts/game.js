@@ -37,6 +37,9 @@ var main = function() {
           $(".boat").draggable({disabled: true});
           $(".boat2").draggable({disabled: true});
           $(".boat3").draggable({disabled: true});
+
+          var pABoats = {};
+          var pBBoats = {};  
         };
 
         $(function timeout_init(){
@@ -74,17 +77,12 @@ var main = function() {
 
         if (event.data == "It's your turn") {
             $(".cover").hide();
-            $(document).one("click", function clickbox(event) { 
-                var clickElement = event.target; 
-                var elementClassName = event.target.className;
-                var id = clickElement.id;
+            $(".p2board").one("click", function clickbox(event) { 
+                var id = event.target.id;
 
-                 if(elementClassName == "box2"){
-                    $(event.target).css('background-color', '#69f0ae');
-                    $(".cover").show();
-                    socket.send("Move: " + id);
-                }
-                
+                $(event.target).css('background-color', '#69f0ae');
+                $(".cover").show();
+                socket.send("Move: " + id);
             })
         }
     };

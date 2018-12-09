@@ -60,7 +60,7 @@ wss.on("connection", function (ws) {
     
     let gameObj = websockets[con.id];
 
-    if (message == "Client ready") {
+    if (message == "Client ready" && con == gameObj.playerA) {
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's player A's turn");
       console.log("[LOG] " + message);

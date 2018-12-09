@@ -3,6 +3,8 @@ var main = function() {
     //display current date
     var today = new Date();
 
+    $(".ready").hide();
+
     function printTime () {
         var today = new Date();
         var hours = today.getHours();
@@ -39,6 +41,17 @@ var main = function() {
 
     socket.onmessage = function(event){
         document.getElementById("status").innerHTML = event.data;
+        if (event.data == "Game started") {
+            setTimeout(function() {document.getElementById("status").innerHTML = "Set boats";}, 1000);
+            $(".ready").show();
+
+            $(".ready").on("click", function (event) {
+                socket.send("Ready from client");
+                $(".ready").fadeOut();
+                document.getElementById("status").innerHTML = "Waiting for opponent to set boats...";
+            });
+            
+        }
     };
 };
 

@@ -237,3 +237,21 @@ h2 {
     animation-duration: 3s;
     overflow: hidden;
 }
+
+.ready {
+    left: -230px;
+    top: 670px;
+    clear: both;
+    position: relative;
+    text-align: center;
+    font-size: 100%;
+    background: #529CE3;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.ready:hover {
+    cursor: pointer;
+    background-color: rgb(47, 140, 228);
+    padding: 12px;
+}

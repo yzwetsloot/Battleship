@@ -5,7 +5,8 @@ var game = require("./gameClass");
 var gameStatus = require("./statTracker");
 var port = process.argv[2];
 var app = express();
-
+//////////////////////////////
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app).listen(port, function () {
@@ -15,13 +16,26 @@ var server = http.createServer(app).listen(port, function () {
 const wss = new websocket.Server({ server });
 var websockets = {};
 
+setInterval(function() {
+  for(let i in websockets){
+      if(websockets.hasOwnProperty(i)){
+          let gameObj = websockets[i];
+          //if the gameObj has a final status, the game is complete/aborted
+          if(gameObj.finalStatus!=null){
+              console.log("\tDeleting element "+i);
+              delete websockets[i];
+          }
+      }
+  }
+}, 50000);
+
 var currentGame = new game(gameStatus.gamesInitialized++);
 var connectionID = 0; //unique id for websocket connection
 
 //callback function gets called after timeout of 2 secs everytime a connection is established
 wss.on("connection", function(ws) {
-
-  let con;
+    gameStatus.playersOnline++;
+    let con;
 
     setTimeout(function() {
         console.log("Connection state: "+ ws.readyState);
@@ -49,13 +63,13 @@ wss.on("connection", function(ws) {
 
     ws.on("close", function(code) {
       console.log(con.id + " disconnected... ");
-
+      gameStatus.playersOnline--;
       let gameObj = websockets[con.id];
 
       if (code == "1001") {
         gameObj.setStatus("ABORTED");
         gameStatus.gamesAborted++;
-
+        con.id--;
         try {
           gameObj.playerA.close();
           gameObj.playerA == null;
@@ -67,7 +81,8 @@ wss.on("connection", function(ws) {
 
         try {
           gameObj.playerB.close();
-          gameObj.playerB.close();
+          gameObj.playerB == null;
+          con.id--;
         }
 
         catch (e) {
@@ -78,18 +93,23 @@ wss.on("connection", function(ws) {
 });
 
 //setup root route, response splash.html from root /public
-app.get('/', function(req, res) {
+/*app.get('/', function(req, res) {
   res.sendFile("splash.html", {root: "./public"});
-});
+});*/
 
+app.get('/', function (req, res) {
+  res.render("splash.ejs", {gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted});
+});
+      
 //setup route /play which loads game.html
 app.get("/play", function(req, res) {
   res.sendFile("game.html", {root: "./public"});
 });
-
+      
 app.get("/*", function(req, res) {
   res.send("Not a valid route...");
-})
+});
+
 
 
 

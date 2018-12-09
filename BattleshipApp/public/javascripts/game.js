@@ -64,6 +64,7 @@ var main = function() {
         }
 
         if (event.data == "It's your turn") {
+            $(".cover").hide();
             $(document).one("click", function (event) { 
                 $(event.target).css('background-color', '#69f0ae');
                 $(".cover").show();

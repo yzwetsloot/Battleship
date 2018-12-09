@@ -17,25 +17,52 @@ var main = function() {
 
     function countDown () {
         document.getElementById('status').innerHTML = "Set boats " + "(" + seconds + ")";
-        seconds--;
+        //ensure boat draggable
+        $(function() {
+            $(".boat").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+            preventCollision: true, containment: "parent"});
+        });
 
+        $(function() {
+            $(".boat2").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+            preventCollision: true, containment: "parent"});
+        });
+
+        $(function() {
+            $(".boat3").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+            preventCollision: true, containment: "parent"});
+        });
+
+        var test = function timeout(){
+          $(".boat").draggable({disabled: true});
+          $(".boat2").draggable({disabled: true});
+          $(".boat3").draggable({disabled: true});
+        };
+
+        $(function timeout_init(){
+            setTimeout(test, 10000);
+        });
+
+        seconds--;
     }
+
+    
     
     //ensure boat draggable
-    $(function() {
-        $(".boat").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
-        preventCollision: true, containment: "parent"});
-    });
+    // $(function() {
+    //     $(".boat").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+    //     preventCollision: true, containment: "parent"});
+    // });
 
-    $(function() {
-        $(".boat2").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
-        preventCollision: true, containment: "parent"});
-    });
+    // $(function() {
+    //     $(".boat2").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+    //     preventCollision: true, containment: "parent"});
+    // });
 
-    $(function() {
-        $(".boat3").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
-        preventCollision: true, containment: "parent"});
-    });
+    // $(function() {
+    //     $(".boat3").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
+    //     preventCollision: true, containment: "parent"});
+    // });
 
     //implementing webSockets
     var socket = new WebSocket("ws://" + window.location.hostname + ":3000");

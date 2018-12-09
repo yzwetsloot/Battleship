@@ -65,14 +65,14 @@ wss.on("connection", function (ws) {
     }
     //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerA) {
-      console.log("[LOG] " + message);
+      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       gameObj.playerB.send("It's your turn");
       gameObj.playerA.send("It's B's turn");
 
     }
     //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerB) {
-      console.log("[LOG] " + message);
+      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's A's turn");
 

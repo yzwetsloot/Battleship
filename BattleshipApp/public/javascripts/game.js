@@ -2,6 +2,12 @@ var main = function() {
    "use strict";
 
    $(".cover").hide();
+    var overlap = function (rect1, rect2) {
+        return !(rect1.right < rect2.left || 
+            rect1.left > rect2.right || 
+            rect1.bottom < rect2.top || 
+            rect1.top > rect2.bottom);
+    }
 
     function printTime () {
         var today = new Date();
@@ -22,6 +28,10 @@ var main = function() {
             $(".boat").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",
             preventCollision: true, containment: "parent"});
         });
+
+        if (overlap($(".boat"), $("#A,2"))) {
+            alert("OVERLAP");
+        }
 
         $(function() {
             $(".boat2").draggable({ grid: [ 46, 46 ] }, {obstacle: ".boat", obstacle: ".boat2", obstacle: ".boat3",

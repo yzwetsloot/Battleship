@@ -55,7 +55,7 @@ var main = function() {
                 }
                 else {
                     document.getElementById("status").innerHTML = "Game will now start";
-                    socket.send("Clients ready");
+                    socket.send("Client ready");
                     clearInterval(x);
                 }
 
@@ -64,17 +64,10 @@ var main = function() {
         }
 
         if (event.data == "It's your turn") {
-            /*$(".p2board").on("click", function (event) {
-                $(document).click(function(event) {
-                    //var text = $(event.target).text();
-                    $(event.target).css('background-color', '#69f0ae');
-                    $(".cover").show();
-                });
-                
-            })*/
-            $(document).one("click", function (event) {
+            $(document).one("click", function (event) { 
                 $(event.target).css('background-color', '#69f0ae');
                 $(".cover").show();
+                socket.send("Move: ");
             })
         }
     };

@@ -19,9 +19,10 @@ var websockets = {};
 //check whether move made is equal to boat position
 function checkMove (move, arr) {
   let a = 0;
+  let b = move.substring(1);
   for(var i = 0; i < arr.length; i++) {
-    if (arr[i] == checkMove) {
-      a = checkMove;
+    if (arr[i] == b) {
+      a = b;
       return a;
     }
   }
@@ -77,17 +78,35 @@ wss.on("connection", function (ws) {
     }
     //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerA) {
-      checkMove(message, )
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
-      gameObj.playerB.send("It's your turn");
-      gameObj.playerA.send("It's B's turn");
+      let a = checkMove(message, arr);
+      if (a == 0) {
+        
+        gameObj.playerB.send("It's your turn");
+        gameObj.playerA.send("It's B's turn");
+      }
 
+      if (a != 0) {
+        
+        gameObj.playerA.send("It's your turn");
+        gameObj.playerB.send("It's A's turn")
+      }
     }
-    //gets executed twice for some reason
+    
     if (message.includes("Move: ") && con == gameObj.playerB) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
-      gameObj.playerA.send("It's your turn");
-      gameObj.playerB.send("It's A's turn");
+      let a = checkMove(message, arr);
+      if (a == 0) {
+        
+        gameObj.playerA.send("It's your turn");
+        gameObj.playerB.send("It's A's turn");
+      }
+
+      if (a != 0) {
+        
+        gameObj.playerB.send("It's your turn");
+        gameObj.playerA.send("It's A's turn")
+      }
 
     }
     if (message == "Hello from client") {

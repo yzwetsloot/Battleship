@@ -86,7 +86,15 @@ var main = function() {
                 }
                 else {
                     pushOverlap(coordinates, $(".small1"));
-                    console.log(overlappingSquares[0]);
+                    
+
+                    function timeout(){ 
+                        var test = document.getElementById("small1").getBoundingClientRect();
+                        var test2 = document.getElementById("C,3").getBoundingClientRect();
+                        console.log(overlap(test, test2));
+                    }
+                    
+                    setTimeout(timeout, 5000)
                     document.getElementById("status").innerHTML = "Game will now start";
                     socket.send("Client ready");
                     clearInterval(x);
@@ -98,7 +106,7 @@ var main = function() {
 
         if (event.data == "It's your turn") {
             $(".cover").hide();
-            $(".p2board").one("click", function clickbox(event) { 
+            $(".p2board").one("click", function(event) { 
                 var id = event.target.id;
 
                 $(event.target).css('background-color', '#69f0ae');

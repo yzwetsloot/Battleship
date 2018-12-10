@@ -16,6 +16,18 @@ var server = http.createServer(app).listen(port, function () {
 const wss = new websocket.Server({ server });
 var websockets = {};
 
+//check whether move made is equal to boat position
+function checkMove (move, arr) {
+  let a = 0;
+  for(var i = 0; i < arr.length; i++) {
+    if (arr[i] == checkMove) {
+      a = checkMove;
+      return a;
+    }
+  }
+  return a;
+}
+
 setInterval(function () {
   for (let i in websockets) {
     if (websockets.hasOwnProperty(i)) {
@@ -65,6 +77,7 @@ wss.on("connection", function (ws) {
     }
     //gets executed twice for some reason
     if (message.includes("Move: ") && con == gameObj.playerA) {
+      checkMove(message, )
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       gameObj.playerB.send("It's your turn");
       gameObj.playerA.send("It's B's turn");

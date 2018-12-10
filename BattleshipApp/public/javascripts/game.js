@@ -2,26 +2,8 @@ var main = function() {
    "use strict";
 
    $(".cover").hide();
-   var overlappingSquares = {};
-   var coordinates = [$("#A,1"), $("#A,2"), $("#A,3"), $("#A,4"), $("#A,5"), $("#A,6"), $("#A,7"), $("#A,8"), $("#A,9"), $("#A,10")];
-
-   var pushOverlap = function (arr1, el) {
-       var a = 0;
-       for (var i = 0; i < arr1.length; i++) {
-           if (overlap(arr1[i], el)) {
-               overlappingSquares[a] = arr1[i];
-               a++;
-           }
-       }
-   }
-
-   
-    var overlap = function (rect1, rect2) {
-        return !(rect1.right < rect2.left || 
-            rect1.left > rect2.right || 
-            rect1.bottom < rect2.top || 
-            rect1.top > rect2.bottom);
-    }
+   var overlappingSquares = [];
+   var coordinates = ['"#A,1"', '"#A,2"', '"#A,3"', '"#A,4"', '"#A,5"', '"#A,6"', '"#A,7"', '"#A,8"', '"#A,9"', '"#A,10"'];
 
     function printTime () {
         var today = new Date();
@@ -85,8 +67,6 @@ var main = function() {
                     countDown();
                 }
                 else {
-                    pushOverlap(coordinates, $(".small1"));
-                    console.log(overlappingSquares[0]);
                     document.getElementById("status").innerHTML = "Game will now start";
                     socket.send("Client ready");
                     clearInterval(x);

@@ -78,10 +78,30 @@ wss.on("connection", function (ws) {
     else if (message == "Client ready" && con == gameObj.playerB) {
 
     }
+
+    else if (message == "Win" && con == gameObj.playerA) {
+      gameObj.playerA.send("You won");
+      gameObj.playerB.send("You lost");
+      gameObj.playerA.close();
+      gameObj.playerB.close();
+      gameStatus.gamesInitialized--;
+      gameStatus.gamesCompleted++;
+    }
+
+    else if (message == "Win" && con == gameObj.playerB) {
+      gameObj.playerA.send("You lost");
+      gameObj.playerB.send("You won");
+      gameObj.playerA.close();
+      gameObj.playerB.close();
+      gameStatus.gamesInitialized--;
+      gameStatus.gamesCompleted++;
+    }
     //gets executed twice for some reason
     else if (message.includes("Move: ") && con == gameObj.playerA) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       var a = checkMove(message.substring(6), arr);
+      console.log(message.substring(6));
+      console.log(arr.toString());
       if (a == 0) {
         console.log("a == 0");
         gameObj.playerB.send("It's your turn");
@@ -100,6 +120,8 @@ wss.on("connection", function (ws) {
     else if (message.includes("Move: ") && con == gameObj.playerB) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       let a = checkMove(message.substring(6), arr);
+      console.log(message.substring(6));
+      console.log(arr.toString());
       if (a == 0) {
         console.log("a == 0");
         gameObj.playerA.send("It's your turn");

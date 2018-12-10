@@ -2,7 +2,7 @@ var main = function () {
     "use strict";
 
     $(".cover").hide();
-
+    var counter = 16;
     var overlap = function (rect1, rect2) {
         return !(rect1.right - 5 < rect2.left ||
             rect1.left > rect2.right - 5 ||
@@ -134,10 +134,16 @@ var main = function () {
             console.log("You hit opponent's boat!");
             var a = document.getElementById("1" + event.data.substring(6));
             $(a).css('background-color', 'red');
+            counter--
+            if (counter == 0) {
+                socket.send("Win");
+            }
         }
 
         if (event.data.includes("HitB")) {
             console.log("One of your boats got hit!");
+            var a = document.getElementById(event.data.substring(6));
+            $(a).css('background-color', 'red');
         }
     };
 };

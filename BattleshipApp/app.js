@@ -18,12 +18,12 @@ var websockets = {};
 
 //check whether move made is equal to boat position
 function checkMove (move, arr) {
-  let a = 0;
-  let b = move.substring(1);
-  for(var i = 0; i < arr.length; i++) {
+  var a = 0;
+  var b = move.substring(1);
+  for (var i = 0; i < arr.length; i++) {
     if (arr[i] == b) {
       a = b;
-      return a;
+      return a;      
     }
   }
   return a;
@@ -49,7 +49,7 @@ var connectionID = 0; //unique id for websocket connection
 wss.on("connection", function (ws) {
   gameStatus.playersOnline++;
   let con;
-
+  var arr;
   console.log("Connection state: " + ws.readyState);
   ws.send("Waiting for opponent...");
   con = ws;
@@ -68,32 +68,34 @@ wss.on("connection", function (ws) {
   console.log("Connection state: " + ws.readyState);
 
   con.on("message", function incoming(message) {
-    
     let gameObj = websockets[con.id];
-
     if (message == "Client ready" && con == gameObj.playerA) {
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's player A's turn");
       console.log("[LOG] " + message);
     }
+
+    else if (message == "Client ready" && con == gameObj.playerB) {
+
+    }
     //gets executed twice for some reason
-    if (message.includes("Move: ") && con == gameObj.playerA) {
+    else if (message.includes("Move: ") && con == gameObj.playerA) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
-      let a = checkMove(message, arr);
+      var a = checkMove(message, arr);
       if (a == 0) {
-        
+        console.log("a == 0");
         gameObj.playerB.send("It's your turn");
         gameObj.playerA.send("It's B's turn");
       }
 
       if (a != 0) {
-        
+        console.log("a != 0");
         gameObj.playerA.send("It's your turn");
         gameObj.playerB.send("It's A's turn")
       }
     }
     
-    if (message.includes("Move: ") && con == gameObj.playerB) {
+    else if (message.includes("Move: ") && con == gameObj.playerB) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       let a = checkMove(message, arr);
       if (a == 0) {
@@ -109,8 +111,14 @@ wss.on("connection", function (ws) {
       }
 
     }
-    if (message == "Hello from client") {
+    else if (message == "Hello from client") {
       console.log("[LOG] " + message + " " + (connectionID - 1));
+    }
+    
+    else {
+      arr = JSON.parse(message);
+      console.log(arr.toString());
+      console.log(arr.length);
     }
 
   });

@@ -109,7 +109,7 @@ var main = function () {
                     for (var i = 0; i < overlappingSquares.length; i++) {
                         console.log(overlappingSquares[i])
                     }
-
+                    socket.send(JSON.stringify(overlappingSquares));
                     document.getElementById("status").innerHTML = "Game will now start";
                     socket.send("Client ready");
                     clearInterval(x);

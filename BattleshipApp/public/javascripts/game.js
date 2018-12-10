@@ -5,6 +5,7 @@ var main = function() {
    var overlappingSquares = {};
    var coordinates = [$("#A,1"), $("#A,2"), $("#A,3"), $("#A,4"), $("#A,5"), $("#A,6"), $("#A,7"), $("#A,8"), $("#A,9"), $("#A,10")];
 
+
    var pushOverlap = function (arr1, el) {
        var a = 0;
        for (var i = 0; i < arr1.length; i++) {
@@ -58,8 +59,31 @@ var main = function() {
           $(".boat2").draggable({disabled: true});
           $(".boat3").draggable({disabled: true});
 
-          var pABoats = {};
-          var pBBoats = {};  
+
+
+         var overlappingBoats = function (boat, arr){
+              for(var i = 0; i < 100; i++){
+                if(overlap(boat.getBoundingClientRect(), arr[i].getBoundingClientRect())){
+                    overlappingSquares.push(boat);
+                }
+              }
+          }
+
+          overlappingBoats("small1", coordinates);
+          overlappingBoats("small2", coordinates);
+          overlappingBoats("small3", coordinates);
+          overlappingBoats("small4", coordinates);
+
+          overlappingBoats("med1", coordinates);
+          overlappingBoats("med2", coordinates);
+          overlappingBoats("med3", coordinates);
+
+          overlappingBoats("large1", coordinates);
+          overlappingBoats("large2", coordinates);
+
+          for(var i = 0; i < overlappingSquares.length(); i++){
+              console.log(overlappingSquares[i])
+          }
         };
 
         $(function timeout_init(){
@@ -88,13 +112,9 @@ var main = function() {
                     pushOverlap(coordinates, $(".small1"));
                     
 
-                    function timeout(){ 
-                        var test = document.getElementById("small1").getBoundingClientRect();
-                        var test2 = document.getElementById("C,3").getBoundingClientRect();
-                        console.log(overlap(test, test2));
-                    }
+        
                     
-                    setTimeout(timeout, 5000)
+        //            setTimeout(timeout, 5000)
                     document.getElementById("status").innerHTML = "Game will now start";
                     socket.send("Client ready");
                     clearInterval(x);

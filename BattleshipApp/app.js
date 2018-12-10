@@ -92,8 +92,8 @@ wss.on("connection", function (ws) {
         console.log("a != 0");
         gameObj.playerA.send("It's your turn");
         gameObj.playerB.send("It's A's turn");
-        gameObj.playerA.send("Hit: " + a);
-        gameObj.playerB.send("Hit: " + a);
+        gameObj.playerA.send("HitA: " + a);
+        gameObj.playerB.send("HitB: " + a);
       }
     }
     
@@ -110,8 +110,8 @@ wss.on("connection", function (ws) {
         console.log("a != 0");
         gameObj.playerB.send("It's your turn");
         gameObj.playerA.send("It's A's turn");
-        gameObj.playerA.send("Hit: " + a);
-        gameObj.playerB.send("Hit: " + a);
+        gameObj.playerB.send("HitA: " + a);
+        gameObj.playerA.send("HitB: " + a);
       }
 
     }

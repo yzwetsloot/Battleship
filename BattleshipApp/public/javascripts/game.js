@@ -129,6 +129,16 @@ var main = function () {
                 socket.send("Move: " + id);
             })
         }
+
+        if (event.data.includes("HitA")) {
+            console.log("You hit opponent's boat!");
+            var a = document.getElementById("1" + event.data.substring(6));
+            $(a).css('background-color', 'red');
+        }
+
+        if (event.data.includes("HitB")) {
+            console.log("One of your boats got hit!");
+        }
     };
 };
 

@@ -139,6 +139,7 @@ var main = function () {
             counter--
             if (counter == 0) {
                 socket.send("Win");
+
             }
         }
 

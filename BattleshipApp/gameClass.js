@@ -3,8 +3,17 @@ var game = function (gameID) {
     this.playerB = null;
     this.id = gameID;
     this.gameState = "0 JOINT";
-
+    this.arrA;
+    this.arrB;
+    this.setArrayA = function (arrA) {
+        this.arrA = arrA;
+    };
+    this.setArrayB = function(arrB) {
+        this.arrB = arrB;
+    };
 }
+
+
 
 game.prototype.hasTwoConnectedPlayers = function () {
     return (this.gameState == "2 JOINT");

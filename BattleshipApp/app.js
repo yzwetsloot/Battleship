@@ -5,8 +5,6 @@ var game = require("./gameClass");
 var gameStatus = require("./statTracker");
 var port = process.argv[2];
 var app = express();
-var arrA = null;
-var arrB = null;
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -81,8 +79,13 @@ wss.on("connection", function (ws) {
     else if (message == "Win" && con == gameObj.playerA) {
       gameObj.playerA.send("You won");
       gameObj.playerB.send("You lost");
+      setTimeout(function() {
+        gameObj.playerA.send("Click 'Home' to play another game!");
+        gameObj.playerB.send("Click 'Home' to play another game!");
+      }, 3000);
       gameObj.playerA.close();
       gameObj.playerB.close();
+      
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
@@ -90,26 +93,26 @@ wss.on("connection", function (ws) {
     else if (message == "Win" && con == gameObj.playerB) {
       gameObj.playerA.send("You lost");
       gameObj.playerB.send("You won");
+      setTimeout(function() {
+        gameObj.playerA.send("Click 'Home' to play another game!");
+        gameObj.playerB.send("Click 'Home' to play another game!");
+      }, 3000);
       gameObj.playerA.close();
       gameObj.playerB.close();
+
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
 
     else if (message.includes("Move: ") && con == gameObj.playerA) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
-      console.log(arrB.length);
-      var a = checkMove(message.substring(6), arrB);
-      console.log(message.substring(6));
-      console.log(arrB.toString());
+      var a = checkMove(message.substring(6), gameObj.arrB);
       if (a == 0) {
-        console.log("a == 0");
         gameObj.playerB.send("It's your turn");
         gameObj.playerA.send("It's B's turn");
       }
 
       if (a != 0) {
-        console.log("a != 0");
         gameObj.playerA.send("It's your turn");
         gameObj.playerB.send("It's A's turn");
         gameObj.playerA.send("HitA: " + a);
@@ -119,18 +122,13 @@ wss.on("connection", function (ws) {
     
     else if (message.includes("Move: ") && con == gameObj.playerB) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
-      console.log(arrA.length);
-      var a = checkMove(message.substring(6), arrA);
-      console.log(message.substring(6));
-      console.log(arrA.toString());
+      var a = checkMove(message.substring(6), gameObj.arrA);
       if (a == 0) {
-        console.log("a == 0");
         gameObj.playerA.send("It's your turn");
         gameObj.playerB.send("It's A's turn");
       }
 
       if (a != 0) {
-        console.log("a != 0");
         gameObj.playerB.send("It's your turn");
         gameObj.playerA.send("It's A's turn");
         gameObj.playerB.send("HitA: " + a);
@@ -144,15 +142,14 @@ wss.on("connection", function (ws) {
 
     else {
       if (con == gameObj.playerA) {
-        arrA = JSON.parse(message);
-        console.log("Array A: " + arrA.toString());
-        console.log(arrA.length);
+        var arrA = JSON.parse(message);
+        gameObj.setArrayA(arrA);
       }
 
       if (con == gameObj.playerB) {
-        arrB = JSON.parse(message);
-        console.log("Array B: " + arrB.toString());
-        console.log(arrB.length);
+        var arrB = JSON.parse(message);
+        gameObj.setArrayB(arrB);
+
       }
     }
 

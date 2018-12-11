@@ -1,10 +1,14 @@
 var express = require("express");
 var http = require("http");
 var websocket = require("ws")
+var cookie = require("cookie-parser");
 var game = require("./gameClass");
 var gameStatus = require("./statTracker");
 var port = process.argv[2];
 var app = express();
+var a = 0;
+
+app.use(cookie());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
@@ -193,6 +197,8 @@ app.get('/', function (req, res) {
 //setup route /play which loads game.html
 app.get("/play", function (req, res) {
   res.sendFile("game.html", { root: "./public" });
+  res.cookie("You have visited " + a + " times");
+  a++;
 });
 
 app.get("/*", function (req, res) {

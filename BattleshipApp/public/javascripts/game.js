@@ -79,7 +79,9 @@ var main = function () {
 
 
     socket.onmessage = function (event) {
-        document.getElementById("status").innerHTML = event.data;
+        if (!event.data.includes("Hit")) {
+            document.getElementById("status").innerHTML = event.data;
+        }
         if (event.data == "Game started") {
             var x = setInterval(function () {
                 if (seconds >= 0) {

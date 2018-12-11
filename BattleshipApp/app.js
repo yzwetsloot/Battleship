@@ -46,7 +46,6 @@ setInterval(function () {
 var currentGame = new game(gameStatus.gamesInitialized++);
 var connectionID = 0; //unique id for websocket connection
 
-//callback function gets called after timeout of 2 secs everytime a connection is established
 wss.on("connection", function (ws) {
   gameStatus.playersOnline++;
   let con;
@@ -96,7 +95,7 @@ wss.on("connection", function (ws) {
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
-    //gets executed twice for some reason
+
     else if (message.includes("Move: ") && con == gameObj.playerA) {
       console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
       console.log(arrB.length);
@@ -190,11 +189,6 @@ wss.on("connection", function (ws) {
   })
 });
 
-//setup root route, response splash.html from root /public
-/*app.get('/', function(req, res) {
-  res.sendFile("splash.html", {root: "./public"});
-});*/
-
 app.get('/', function (req, res) {
   res.render("splash.ejs", { gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted });
 });
@@ -207,7 +201,5 @@ app.get("/play", function (req, res) {
 app.get("/*", function (req, res) {
   res.send("Not a valid route...");
 });
-
-
 
 

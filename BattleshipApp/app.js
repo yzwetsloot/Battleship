@@ -86,9 +86,11 @@ wss.on("connection", function (ws) {
       setTimeout(function() {
         gameObj.playerA.send("Click 'Home' to play another game!");
         gameObj.playerB.send("Click 'Home' to play another game!");
+        gameObj.playerA.close();
+        gameObj.playerB.close();
       }, 3000);
-      gameObj.playerA.close();
-      gameObj.playerB.close();
+  //    gameObj.playerA.close();
+   //   gameObj.playerB.close();
       
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
@@ -100,10 +102,10 @@ wss.on("connection", function (ws) {
       setTimeout(function() {
         gameObj.playerA.send("Click 'Home' to play another game!");
         gameObj.playerB.send("Click 'Home' to play another game!");
+        gameObj.playerB.close();
+        gameObj.playerA.close();
       }, 3000);
-      gameObj.playerA.close();
-      gameObj.playerB.close();
-
+      
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }

@@ -7,6 +7,7 @@ var gameStatus = require("./statTracker");
 var port = process.argv[2];
 var app = express();
 var a = 0;
+var d = 0;
 
 app.use(cookie());
 app.set("view engine", "ejs");
@@ -60,6 +61,9 @@ wss.on("connection", function (ws) {
   console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
   con.send((playerType == "A") ? "You are player A" : "You are player B");
 
+  
+
+
   if (currentGame.hasTwoConnectedPlayers()) {
     currentGame.playerA.send("Game started");
     currentGame.playerB.send("Game started");
@@ -70,6 +74,7 @@ wss.on("connection", function (ws) {
 
   con.on("message", function incoming(message) {
     let gameObj = websockets[con.id];
+
     if (message == "Client ready" && con == gameObj.playerA) {
       gameObj.playerA.send("It's your turn");
       gameObj.playerB.send("It's player A's turn");
@@ -89,8 +94,6 @@ wss.on("connection", function (ws) {
         gameObj.playerA.close();
         gameObj.playerB.close();
       }, 3000);
-  //    gameObj.playerA.close();
-   //   gameObj.playerB.close();
       
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
@@ -146,6 +149,7 @@ wss.on("connection", function (ws) {
       console.log("[LOG] " + message + " " + (connectionID - 1));
     }
 
+
     else {
       if (con == gameObj.playerA) {
         var arrA = JSON.parse(message);
@@ -165,12 +169,12 @@ wss.on("connection", function (ws) {
     console.log(con.id + " disconnected... ");
     gameStatus.playersOnline--;
     let gameObj = websockets[con.id];
-
     if (code == "1001") {
       gameObj.setStatus("ABORTED");
       gameStatus.gamesAborted++;
       con.id--;
       try {
+        gameObj.playerA.send("Your opponent has left the game");
         gameObj.playerA.close();
         gameObj.playerA == null;
       }
@@ -180,6 +184,7 @@ wss.on("connection", function (ws) {
       }
 
       try {
+        gameObj.playerA.send("Your opponent has left the game");
         gameObj.playerB.close();
         gameObj.playerB == null;
         con.id--;

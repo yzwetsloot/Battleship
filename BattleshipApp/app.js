@@ -15,7 +15,6 @@ var server = http.createServer(app).listen(port, function () {
 const wss = new websocket.Server({ server });
 var websockets = {};
 
-//check whether move made is equal to boat position
 function checkMove (move, arr) {
   var a = 0;
   var b = move.substring(1);
@@ -82,10 +81,10 @@ wss.on("connection", function (ws) {
       setTimeout(function() {
         gameObj.playerA.send("Click 'Home' to play another game!");
         gameObj.playerB.send("Click 'Home' to play another game!");
+        gameObj.playerA.close();
+        gameObj.playerB.close();
       }, 3000);
-      gameObj.playerA.close();
-      gameObj.playerB.close();
-      
+    
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
@@ -96,16 +95,16 @@ wss.on("connection", function (ws) {
       setTimeout(function() {
         gameObj.playerA.send("Click 'Home' to play another game!");
         gameObj.playerB.send("Click 'Home' to play another game!");
+        gameObj.playerA.close();
+        gameObj.playerB.close();
       }, 3000);
-      gameObj.playerA.close();
-      gameObj.playerB.close();
 
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
 
     else if (message.includes("Move: ") && con == gameObj.playerA) {
-      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
+      console.log("[LOG] " + message.substring(7) + " [CONNECTION]: " + con.id);
       var a = checkMove(message.substring(6), gameObj.arrB);
       if (a == 0) {
         gameObj.playerB.send("It's your turn");
@@ -121,7 +120,7 @@ wss.on("connection", function (ws) {
     }
     
     else if (message.includes("Move: ") && con == gameObj.playerB) {
-      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
+      console.log("[LOG] " + message.substring(7) + " [CONNECTION]: " + con.id);
       var a = checkMove(message.substring(6), gameObj.arrA);
       if (a == 0) {
         gameObj.playerA.send("It's your turn");
@@ -165,6 +164,10 @@ wss.on("connection", function (ws) {
       gameStatus.gamesAborted++;
       con.id--;
       try {
+        gameObj.playerA.send("Opponent left game");
+        setTimeout(function () {
+          gameObj.playerA.send("Click 'Home' to play a new game");
+        }, 2000);
         gameObj.playerA.close();
         gameObj.playerA == null;
       }
@@ -174,6 +177,10 @@ wss.on("connection", function (ws) {
       }
 
       try {
+        gameObj.playerB.send("Opponent left game");
+        setTimeout(function () {
+          gameObj.playerB.send("Click 'Home' to play a new game");
+        }, 2000);
         gameObj.playerB.close();
         gameObj.playerB == null;
         con.id--;

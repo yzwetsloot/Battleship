@@ -1,6 +1,6 @@
 var main = function () {
     "use strict";
-    //popup 
+
     $(".rules").hide();
     $(".close").hide();
 
@@ -14,8 +14,6 @@ var main = function () {
         $(".close").fadeOut();
     });
 
-    //maybe implement it so that clicking anywhere except howToPlay message makes it dissappear
-    
 };
 $(document).ready(main);
    

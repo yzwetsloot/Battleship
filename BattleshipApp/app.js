@@ -18,7 +18,6 @@ var server = http.createServer(app).listen(port, function () {
 const wss = new websocket.Server({ server });
 var websockets = {};
 
-//check whether move made is equal to boat position
 function checkMove (move, arr) {
   var a = 0;
   var b = move.substring(1);
@@ -112,7 +111,7 @@ wss.on("connection", function (ws) {
     }
 
     else if (message.includes("Move: ") && con == gameObj.playerA) {
-      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
+      console.log("[LOG] " + message.substring(7) + " [CONNECTION]: " + con.id);
       var a = checkMove(message.substring(6), gameObj.arrB);
       if (a == 0) {
         gameObj.playerB.send("It's your turn");
@@ -128,7 +127,7 @@ wss.on("connection", function (ws) {
     }
     
     else if (message.includes("Move: ") && con == gameObj.playerB) {
-      console.log("[LOG] " + message + " [CONNECTION]: " + con.id);
+      console.log("[LOG] " + message.substring(7) + " [CONNECTION]: " + con.id);
       var a = checkMove(message.substring(6), gameObj.arrA);
       if (a == 0) {
         gameObj.playerA.send("It's your turn");

@@ -133,20 +133,20 @@ var main = function () {
         }
 
         if (event.data.includes("HitA")) {
-            console.log("You hit opponent's boat!");
+            document.getElementById("status").innerHTML = "Opponent's boat hit!";
             var a = document.getElementById("1" + event.data.substring(6));
-            $(a).css('background-color', 'red');
-            counter--
+            $(a).css('background-color', '#f07b69');
+            //counter fucks up if you click to often on a square you already got!
+            counter--;
             if (counter == 0) {
                 socket.send("Win");
-
             }
         }
 
         if (event.data.includes("HitB")) {
-            console.log("One of your boats got hit!");
+            document.getElementById("status").innerHTML = "One of your boats got hit!";
             var a = document.getElementById(event.data.substring(6));
-            $(a).css('background-color', 'red');
+            $(a).css('background-color', '#f07b69');
         }
     };
 };

@@ -195,18 +195,6 @@ wss.on("connection", function (ws) {
 });
 
 app.get('/', function (req, res) {
-  res.render("splash.ejs", {totalVisits: gameStatus.totalVisits, gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted });
-});
-
-//setup route /play which loads game.html
-app.get("/play", function (req, res) {
- // console.log( req.cookies);
-  
-  
-  res.sendFile("game.html", { root: "./public" }, cookie);
-  
-  
-
   var visits;
   visits = JSON.stringify(req.cookies).substring(11, 12);
   
@@ -218,7 +206,15 @@ app.get("/play", function (req, res) {
   visits++;
   gameStatus.totalVisits = visits;
   res.cookie("Visits", visits, {maxAge: 31536000});
-  res.send
+  res.render("splash.ejs", {totalVisits: gameStatus.totalVisits, gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted });
+  
+  
+});
+
+//setup route /play which loads game.html
+app.get("/play", function (req, res) {
+ 
+  res.sendFile("game.html", { root: "./public" }, cookie);
  
 });
 

@@ -6,8 +6,6 @@ var game = require("./gameClass");
 var gameStatus = require("./statTracker");
 var port = process.argv[2];
 var app = express();
-var a = 0;
-var d = 0;
 
 app.use(cookie());
 app.set("view engine", "ejs");
@@ -51,6 +49,7 @@ var connectionID = 0; //unique id for websocket connection
 
 wss.on("connection", function (ws) {
   gameStatus.playersOnline++;
+  gameStatus.gamesInitialized++;
   let con;
   console.log("Connection state: " + ws.readyState);
   ws.send("Waiting for opponent...");
@@ -60,9 +59,6 @@ wss.on("connection", function (ws) {
   websockets[con.id] = currentGame;
   console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
   con.send((playerType == "A") ? "You are player A" : "You are player B");
-
-  
-
 
   if (currentGame.hasTwoConnectedPlayers()) {
     currentGame.playerA.send("Game started");
@@ -95,6 +91,7 @@ wss.on("connection", function (ws) {
         gameObj.playerB.close();
       }, 3000);
       
+      
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
@@ -109,6 +106,7 @@ wss.on("connection", function (ws) {
         gameObj.playerA.close();
       }, 3000);
       
+  
       gameStatus.gamesInitialized--;
       gameStatus.gamesCompleted++;
     }
@@ -198,15 +196,33 @@ wss.on("connection", function (ws) {
 });
 
 app.get('/', function (req, res) {
-  res.render("splash.ejs", { gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted });
+  res.render("splash.ejs", {totalVisits: gameStatus.totalVisits, gamesStarted: (gameStatus.gamesInitialized - 1) - gameStatus.gamesAborted, playersOnline: gameStatus.playersOnline, gamesCompleted: gameStatus.gamesCompleted });
 });
 
 //setup route /play which loads game.html
 app.get("/play", function (req, res) {
-  res.sendFile("game.html", { root: "./public" });
-  res.cookie("You have visited " + a + " times");
-  a++;
+ // console.log( req.cookies);
+  
+  
+  res.sendFile("game.html", { root: "./public" }, cookie);
+  
+  
+
+  var visits;
+  visits = JSON.stringify(req.cookies).substring(11, 12);
+  
+  if(JSON.stringify(req.cookies).length == 15){
+    visits = JSON.stringify(req.cookies).substring(11, 13);
+  }
+  
+
+  visits++;
+  gameStatus.totalVisits = visits;
+  res.cookie("Visits", visits, {maxAge: 31536000});
+  res.send
+ 
 });
+
 
 app.get("/*", function (req, res) {
   res.send("Not a valid route...");

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="images/icon.ico" />
+        <title>Battleship online</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">  
+        <link href="stylesheets/splash.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <div class="info">  
+                <p><b>Ongoing games: <%= gamesStarted %></b></p>
+                <p><b>Players online: <%= playersOnline %></b></p>
+                <p><b>Games completed: <%= gamesCompleted %></b></p>
+                <p><b>Your total visits: <%= totalVisits %></b></p>
+            </div>
+            <h1 class="title"><span class="char1">B</span><span class="char2">a</span><span class="char3">t</span><span class="char4">t</span><span class="char5">l</span><span class="char6">e</span><span class="char7">s</span><span class="char8">h</span><span class="char9">i</span><span class="char10">p</span></h1>
+            <p class="undertext"><b>An online, two players, guessing game</b></p>
+        </header>
+        <main>
+            <img src="images/logo.png" alt="battleship logo" width="242,5" height="262">
+            <div class="buttons">
+                <p>
+                    <form action="/play" method="get" >
+                        <button class="play" type="submit">Play</button>
+                    </form>
+                    <button class="howTo" type="submit">How to play</button>
+                </p>
+            </div>
+            <div class="rules"> <h4>How to play Battleship</h4>
+            <p>Battleship is a war-themed board game for two players in which the opponents 
+                try to guess the location of the other's various ships. In our version of the game 
+                you have 10 seconds to place the boats in the positions of your liking. Then, one of the two players
+                gets to guess first. If he guesses correctlyand hit one of the other player's boats, the box that was
+                clicked will turn red, indicating a hit. If he misses, the box will turn red and the other player can make
+                a guess. This will continue until one of the players destroyed all of the opponent's boats. </p>
+            </div>
+            <div class="close">   <span class=x>X</span>    </div>
+        </main>
+        <footer>
+            <span class="madeby"><b>Created by: Max van Dijk and Youri Zwetsloot</b></span>
+            <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+            <script src="javascripts/splash.js"></script>
+        </footer>
+    </body>
+</html>

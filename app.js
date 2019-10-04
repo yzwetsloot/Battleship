@@ -2,8 +2,8 @@ var express = require("express");
 var http = require("http");
 var websocket = require("ws")
 var cookie = require("cookie-parser");
-var game = require("./gameClass");
-var gameStatus = require("./statTracker");
+var game = require("./public/javascripts/gameClass.js");
+var gameStatus = require("./public/javascripts/statTracker.js");
 var port = process.argv[2];
 var app = express();
 
